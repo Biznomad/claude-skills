@@ -1,0 +1,18 @@
+[Unit]
+Description={{AGENT_NAME}} — {{BUSINESS_NAME}} Operations Manager Bot (Kimi)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory={{INSTALL_DIR}}
+EnvironmentFile={{INSTALL_DIR}}/.env
+ExecStart=/usr/bin/python3 {{INSTALL_DIR}}/ops_bot.py
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

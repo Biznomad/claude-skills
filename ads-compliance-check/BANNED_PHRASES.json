@@ -1,0 +1,110 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "updated": "2026-05-13",
+    "notes": "Phrases are matched case-insensitively as whole-word regex (\\b...\\b). Use the 'niche' field in the manifest to select the list. 'common' is always applied. Multiple niches can be combined."
+  },
+  "common": [
+    "guarantee",
+    "guaranteed",
+    "100% effective",
+    "miracle",
+    "miraculous",
+    "risk[- ]free",
+    "no risk",
+    "free trial(?!.{0,40}terms)",
+    "act now",
+    "limited time only",
+    "click here",
+    "best ever",
+    "#1 in the world",
+    "world's best"
+  ],
+  "health": {
+    "description": "Meta + Google + TikTok ban these for supplements, sea moss, gummies, wellness products.",
+    "phrases": [
+      "cure",
+      "cures",
+      "treat",
+      "treats",
+      "treatment for",
+      "prevent",
+      "prevents",
+      "prevention of",
+      "diagnose",
+      "diagnoses",
+      "heals",
+      "healing",
+      "reverses",
+      "reverse [a-z]+ disease",
+      "boosts immunity",
+      "boost your immunity",
+      "fixes",
+      "fix your",
+      "eliminates [a-z]+",
+      "before and after",
+      "before & after",
+      "lose [0-9]+ ?(lbs|pounds|kg) in",
+      "weight loss in [0-9]+ days",
+      "drop [0-9]+ (pounds|lbs)",
+      "doctor[- ]?recommended (?!.{0,40}disclaimer)",
+      "FDA approved",
+      "clinically proven to (cure|treat|prevent)",
+      "saves you \\$[0-9]+ ?/?(month|year) on (medication|prescription|multivitamin)"
+    ]
+  },
+  "finance": {
+    "description": "Google + Meta YMYL category — financial products, loans, credit, crypto.",
+    "phrases": [
+      "get rich quick",
+      "guaranteed returns",
+      "guaranteed profit",
+      "no credit check",
+      "bad credit ok",
+      "0% APR forever",
+      "double your money",
+      "[0-9]+x returns? guaranteed",
+      "instant approval",
+      "instant cash",
+      "free money",
+      "passive income guaranteed",
+      "make \\$[0-9,]+ ?(per|/) ?(day|week|month) guaranteed"
+    ]
+  },
+  "real_estate": {
+    "description": "Fair Housing Act + Meta special-ad-category for housing.",
+    "phrases": [
+      "no kids",
+      "no children",
+      "adults only",
+      "(christian|jewish|muslim|catholic) (community|neighborhood)",
+      "exclusive (white|black|asian|hispanic) (community|neighborhood)",
+      "perfect for (singles|families|couples) only",
+      "(male|female) (tenant|roommate) only",
+      "no section 8",
+      "no vouchers"
+    ]
+  },
+  "tiktok_extra": {
+    "description": "TikTok-specific extras beyond health.",
+    "phrases": [
+      "shocking results",
+      "doctors hate this",
+      "they don't want you to know",
+      "one weird trick",
+      "secret the (industry|government|doctors) (don't|doesn't) want you to know"
+    ]
+  },
+  "hv_brand_specific": {
+    "description": "Holistic Vitalis preferences — fix on detection.",
+    "phrases": [
+      "92 of 102 essential minerals",
+      "92 of 102",
+      "sample[- ]size",
+      "mini jar",
+      "tall jam jar",
+      "pill bottle"
+    ],
+    "fix_hint": "Replace with '90+ minerals'. Never reference sample-size or non-Mason jars."
+  }
+}

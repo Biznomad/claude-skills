@@ -1,0 +1,6 @@
+Hi {{OWNER_FIRST_NAME}} — your AI team is ready. I'm adding you to a private Telegram group called "{{CLIENT_NAME}} AI Team" right after this message. Once you're in, just send a quick "hi" in the group — your operations manager will introduce herself there and walk you through the setup. Takes about 20 minutes, all on your phone.
+
+Stay in the group when she responds — that's the whole flow.
+I'm a WhatsApp away if you get stuck.
+
+— {{OPERATOR_NAME}}

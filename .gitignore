@@ -1,0 +1,22 @@
+# Heavy installed toolkits / plugins (reinstall via /plugin on the other machine)
+gstack/
+
+# Regenerable / machine-local junk
+node_modules/
+.venv/
+*venv/
+__pycache__/
+*.pyc
+*-browser-data/
+.DS_Store
+.netlify/
+
+# Nested third-party repos (keep their own git history out of this one)
+email-marketing-bible/
+
+# Large binary media — sync separately if needed
+*.mp4
+*.mov
+*.webm
+*.avi
+*.zip

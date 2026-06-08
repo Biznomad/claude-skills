@@ -1,0 +1,123 @@
+{
+  "_comment": "Maps Q4 headache answers to specialist agents the client's bots should prioritize. Used to customize SOUL.md priority_agents and the SAMPLE-WEEK.md deep-dive recommendation.",
+
+  "not_enough_customers": {
+    "human_label": "Not enough customers coming in",
+    "primary_bot": "marketing",
+    "agents": [
+      "marketing-content-creator",
+      "marketing-growth-hacker",
+      "marketing-agentic-search-optimizer",
+      "marketing-tiktok-strategist",
+      "paid-media-ppc-strategist",
+      "paid-media-creative-strategist"
+    ],
+    "first_week_action": "Map 3 untapped acquisition channels + draft a 7-post content sprint targeting your highest-intent customer profile.",
+    "day14_deep_dive": "Full audience + acquisition audit: which channel has the lowest CPA for your customer LTV, and 3 tested-elsewhere hooks to try."
+  },
+
+  "no_conversion": {
+    "human_label": "Customers come but don't buy",
+    "primary_bot": "marketing",
+    "agents": [
+      "marketing-landing-page-optimizer",
+      "design-ux-researcher",
+      "design-ui-designer",
+      "product-feedback-synthesizer",
+      "marketing-content-creator",
+      "sales-discovery-coach"
+    ],
+    "first_week_action": "Run a conversion audit on your highest-traffic page + identify the 3 biggest objections you're not addressing.",
+    "day14_deep_dive": "Full funnel teardown: heatmap signals, copy gaps, friction points. Deliver 5 specific changes ranked by expected conversion lift."
+  },
+
+  "social_overwhelm": {
+    "human_label": "I can't keep up with social media / content",
+    "primary_bot": "social",
+    "agents": [
+      "marketing-content-creator",
+      "marketing-tiktok-strategist",
+      "marketing-instagram-curator",
+      "marketing-twitter-engager",
+      "design-brand-guardian",
+      "design-visual-storyteller"
+    ],
+    "first_week_action": "Build a 14-day content calendar in your voice across all your platforms + draft the first 7 posts for approval.",
+    "day14_deep_dive": "Establish a sustainable content rhythm: which 2 platforms matter most for your business, what posting cadence is realistic, what types of content to never bother making."
+  },
+
+  "ads_not_working": {
+    "human_label": "My ads aren't working",
+    "primary_bot": "marketing",
+    "agents": [
+      "paid-media-ppc-strategist",
+      "paid-media-creative-strategist",
+      "paid-media-paid-social-strategist",
+      "paid-media-search-query-analyst",
+      "paid-media-tracking-specialist",
+      "marketing-trend-researcher"
+    ],
+    "first_week_action": "Audit current ad accounts for tracking health + wasted spend. Identify which campaigns to pause TODAY.",
+    "day14_deep_dive": "Full paid media restructure: new creative concepts based on competitor intel, audience refinement, bid strategy review, and 5 specific tests to run."
+  },
+
+  "ops_chaos": {
+    "human_label": "Operations are chaos",
+    "primary_bot": "ops",
+    "agents": [
+      "project-management-sprint-prioritizer",
+      "project-management-scrum-coach",
+      "engineering-devops",
+      "support-executive-summary-generator",
+      "support-infrastructure-maintainer",
+      "engineering-backend-architect"
+    ],
+    "first_week_action": "Inventory all your tools + systems. Identify the 5 things eating most of your time and which ones can be automated or delegated.",
+    "day14_deep_dive": "Operations restructure: define what YOU should do vs delegate vs automate, build standard operating procedures for the top 5 recurring tasks."
+  },
+
+  "losing_customers": {
+    "human_label": "I'm losing customers I worked hard to win",
+    "primary_bot": "social",
+    "agents": [
+      "marketing-email-strategist",
+      "support-customer-success",
+      "marketing-content-creator",
+      "product-feedback-synthesizer",
+      "sales-account-strategist",
+      "support-support-responder"
+    ],
+    "first_week_action": "Audit your retention email flows + identify the 3 biggest reasons customers churn (look at your last 20 cancellations).",
+    "day14_deep_dive": "Build a retention engine: winback sequence, value-add nurture series, NPS feedback loop, and a churn early-warning system."
+  },
+
+  "no_competitor_intel": {
+    "human_label": "I have no idea what competitors are doing",
+    "primary_bot": "intel",
+    "agents": [
+      "marketing-trend-researcher",
+      "marketing-agentic-search-optimizer",
+      "paid-media-search-query-analyst",
+      "product-trend-researcher",
+      "strategy-scenario-marketing-campaign",
+      "specialized-competitive-intel"
+    ],
+    "first_week_action": "Map your top 5 competitors + set up daily scans of their ads, pricing, new products, and content.",
+    "day14_deep_dive": "Full competitive landscape: positioning map, 3 unclaimed angles you could own, and 5 specific moves competitors are making that you should respond to."
+  },
+
+  "unclear_finances": {
+    "human_label": "I can't tell if I'm actually making money",
+    "primary_bot": "ops",
+    "agents": [
+      "finance-financial-analyst",
+      "finance-accounts-payable-agent",
+      "support-finance-tracker",
+      "strategy-scenario-startup-mvp",
+      "support-executive-summary-generator",
+      "product-manager"
+    ],
+    "first_week_action": "Build a one-page weekly financial dashboard (revenue, COGS, ad spend, net) + identify your true unit economics.",
+    "day14_deep_dive": "Full P&L analysis with bot-driven insights: where money is actually going, which products are profitable vs loss leaders, and 3 financial decisions to make this month."
+  }
+}

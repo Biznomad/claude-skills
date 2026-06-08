@@ -1,0 +1,43 @@
+{
+  "_comment_": "Copy this to clients/{slug}.json and fill in real values. Do NOT commit to a public git repo with real Telegram tokens.",
+  "slug": "dlluxe",
+  "client_name": "D'Lluxe Scrubs",
+  "client_init": "DLS",
+  "owner_name": "Owner Name",
+  "owner_telegram_id": 5165464044,
+  "owner_timezone": "America/New_York",
+  "tier": "full",
+  "brand_color_hex": "#000000",
+  "brand_emoji": "👩‍⚕️",
+  "vertical": "medical scrubs / apparel",
+  "audience": "nurses, dental staff, medical professionals",
+  "voice_keywords_use": ["confident", "premium", "fitted", "all-day comfort"],
+  "voice_keywords_avoid": ["cheap", "basic", "generic"],
+  "platforms": {
+    "site": "dlluxescrubs.com",
+    "shopify_domain": "dlluxe.myshopify.com",
+    "klaviyo_account_id": null,
+    "ghl_location": null,
+    "manychat": null,
+    "meta_ad_account": null,
+    "google_ads_account": null
+  },
+  "compliance": {
+    "fda_supplement_rules": false,
+    "medical_device_rules": false,
+    "regulated_industry_notes": null
+  },
+  "active_ads_baseline": {
+    "platform": null,
+    "budget_per_day": null,
+    "roas_baseline": null
+  },
+  "klaviyo_flows": {},
+  "telegram_bot_tokens": {
+    "ops":       "PASTE_FROM_BOTFATHER_HERE",
+    "social":    "PASTE_FROM_BOTFATHER_HERE",
+    "marketing": "PASTE_FROM_BOTFATHER_HERE",
+    "intel":     "PASTE_FROM_BOTFATHER_HERE"
+  },
+  "telegram_team_group_chat_id": null
+}

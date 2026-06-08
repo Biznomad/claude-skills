@@ -1,0 +1,22 @@
+{
+  "slug": "legacy-vault",
+  "agent_name": "Cliff Grace",
+  "business_name": "Legacy Vault (Power Without Limits)",
+  "server_ssh": "umi",
+  "jump_host": "root@187.77.10.20",
+  "telegram_bot_token": "8731093602:AAGwIgbOShZo0mrb0VMA0zI5jEPgktT4KpU",
+  "telegram_chat_id": 8344894716,
+  "admin_telegram_ids": [8344894716, 5165464044],
+  "kimi_api_key_env": "KIMI_API_KEY",
+  "kimi_base": "https://api.kimi.com/coding/v1",
+  "kimi_model": "kimi-for-coding",
+  "kimi_user_agent": "claude-code/1.0",
+  "data_dir": "/root/legacy-vault-ops/data",
+  "config_file": "/root/legacy-vault-ops/config/business.json",
+  "install_dir": "/root/cliff",
+  "service_name": "cliff-bot",
+  "mission": "30-day sprint: 100 signed-up users on the Legacy Vault waitlist or beta.",
+  "founder": "Nita Baker — first-time SaaS founder, technical newcomer",
+  "persona_style": "patient teacher: plain-English narration, defines jargon inline, celebrates small wins, two-layer responses (short answer + optional behind-the-scenes)",
+  "_notes": "DM-only deployment (no group). telegram_chat_id and admin_telegram_ids[0] will be Nita's numeric user ID once she taps Start on @Cliff_Grace_Bot. admin_telegram_ids[1] = Naeem (5165464044) for oversight."
+}

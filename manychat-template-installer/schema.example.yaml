@@ -1,0 +1,76 @@
+# ManyChat Template Installer — example config (Vicelle Naturals)
+#
+# Save real client configs as configs/<client_slug>.yaml. The client_slug field
+# MUST match the filename stem; the loader enforces this to prevent
+# cross-client foot-guns (per CLAUDE.md project-isolation rule).
+#
+# Credentials are NEVER stored here. Reference them by env-var or keychain
+# entry, loaded by the operator before launching the script.
+
+client_slug: vicelle  # must match filename: vicelle.yaml
+
+# Permanent install URL from the master Biznomad ManyChat account.
+template_url: https://manychat.com/template/install/REPLACE_WITH_REAL_TOKEN
+
+# The ManyChat-connected page name in the TARGET account (used in wizard step 1).
+target_page_name: "Vicelle Naturals"
+
+# How creds are sourced. The script does NOT read these directly — it expects
+# you to have logged in interactively once; this block is documentation for the
+# operator + future automation.
+credentials:
+  source: env_file          # env_file | keychain | none
+  env_file: ~/.manychat-installer.env   # exports MANYCHAT_EMAIL + MANYCHAT_PASSWORD (operator use)
+  # Alternatively for keychain:
+  # source: keychain
+  # keychain_service: manychat-vicelle
+
+# Flow display names that should exist after install. The verify pass walks
+# this list to confirm everything landed.
+flows:
+  - "01 — Welcome & Quiz"
+  - "02 — Product Match"
+  - "03 — Cart Recovery"
+  - "04 — Replenishment"
+  - "05 — VIP Loyalty"
+  - "06 — Support & FAQ"
+
+# {{placeholder}} → replacement text. Nested dicts get flattened as
+# `<parent>_<child>` (e.g. product_1.name → product_1_name).
+placeholders:
+  brand_name: "Vicelle Naturals"
+  owner_first_name: "Naeem"
+  shop_url: "https://vicellenaturals.com"
+  support_email: "support@vicellenaturals.com"
+  discount_code_welcome: "WELCOME15"
+  discount_code_vip: "VIP25"
+  free_shipping_threshold: "$75"
+  product_1:
+    name: "Mushroom Gummies"
+    url: "https://vicellenaturals.com/products/mushroom-gummies"
+  product_2:
+    name: "Sea Moss Gel — Strawberry"
+    url: "https://vicellenaturals.com/products/sea-moss-gel-strawberry"
+  product_3:
+    name: "Sea Moss Gel — Mango"
+    url: "https://vicellenaturals.com/products/sea-moss-gel-mango"
+
+# Rename tags created by the template (PLACEHOLDER_*) into brand-specific.
+tag_renames:
+  PLACEHOLDER_VIP: VICELLE_VIP
+  PLACEHOLDER_LEAD_NEW: VICELLE_LEAD_NEW
+  PLACEHOLDER_CART_ABANDON: VICELLE_CART_ABANDON
+  PLACEHOLDER_QUIZ_COMPLETE: VICELLE_QUIZ_COMPLETE
+
+# Rename custom fields (these don't strictly need the PLACEHOLDER_ prefix
+# requirement; the loader will warn but allow if both sides agree).
+field_renames:
+  PLACEHOLDER_preferred_product: vicelle_preferred_product
+  PLACEHOLDER_wellness_goal: vicelle_wellness_goal
+  PLACEHOLDER_last_order_date: vicelle_last_order_date
+
+# Things to do AFTER the override pass succeeds.
+post_install_actions:
+  - type: subscribe_owner_to_admin_notifications
+  - type: set_default_reply
+    text: "Hey! Naeem from Vicelle here. I'll get back within 24h — in the meantime tap the menu below."

@@ -1,0 +1,119 @@
+{
+  "_comment": "Vicelle Naturals — first Biznomad beta tester. Enterprise tier at $0 until graduation (~45 days).",
+  "slug": "vicelle",
+  "client_name": "Vicelle Naturals",
+  "client_init": "VN",
+  "owner_name": "Michelle",
+  "owner_telegram_id": 5165464044,
+  "owner_timezone": "America/New_York",
+  "tier": "enterprise",
+  "beta_tester": true,
+  "beta_start_date": "2026-05-29",
+  "billing_note": "Beta — do not invoice. Pricing discussion at graduation.",
+  "brand_color_hex": "#47763B",
+  "brand_emoji": "🌱",
+  "vertical": "sea moss + natural wellness supplements",
+  "audience": "Black-owned wellness consumers, functional-medicine curious women 28-55, ET/CT timezones",
+  "voice_keywords_use": ["warm", "knowledgeable", "grandma-with-a-science-degree", "ritual + science"],
+  "voice_keywords_avoid": ["clinically proven", "doctor-recommended", "cures", "boosts immunity"],
+  "headaches": [
+    "ads_not_working",
+    "no_competitor_intel",
+    "social_overwhelm"
+  ],
+  "solo_operator": false,
+  "platforms": {
+    "site": "vicellenaturals.com",
+    "shopify_domain": "zrwwbj-jq.myshopify.com",
+    "klaviyo_account_id": "V8fsvS",
+    "ghl_location": "GDt5uoQOUGSvYt4Jqlrj",
+    "manychat": "PRO — Vicelle Wellness Concierge",
+    "meta_ad_account": null,
+    "google_ads_account": null
+  },
+  "compliance": {
+    "fda_supplement_rules": true,
+    "medical_device_rules": false,
+    "regulated_industry_notes": "Structure/function language only. Never claim treat/cure/prevent disease."
+  },
+  "active_ads_baseline": {
+    "platform": "Meta",
+    "budget_per_day": 25,
+    "roas_baseline": 1.29,
+    "campaign_name": "Mushroom Gummies ASC"
+  },
+  "klaviyo_flows": {
+    "Abandoned Checkout": "QW96sp",
+    "Welcome Series": "S3ntvH",
+    "Customer Thank You": "U7BjGW",
+    "Customer Winback": "RUCqvR",
+    "Browse Abandonment": "UUFmKX"
+  },
+  "telegram_bot_tokens": {
+    "ops": "see /root/.hermes/profiles/vicelle-ops/.env on vicelle VPS",
+    "social": "see /root/.hermes/profiles/vicelle-social/.env on vicelle VPS",
+    "marketing": "see /root/.hermes/profiles/vicelle-marketing/.env on vicelle VPS",
+    "intel": "see /root/.hermes/profiles/vicelle-intel/.env on vicelle VPS"
+  },
+  "telegram_bot_usernames": {
+    "ops": "@Vicelle_Ops_Bot",
+    "social": "@VN_Social_Manager_Bot",
+    "marketing": "@VN_MarketingAgent_Bot",
+    "intel": "@VN_Intel_Agent_Bot"
+  },
+  "telegram_team_group_chat_id": null,
+  "vps": {
+    "provider": "Hostinger",
+    "vps_id": 1703808,
+    "ipv4": "2.25.145.118",
+    "hostname": "vicelle-vps.vicellenaturals.com",
+    "datacenter": "Boston 2 (dc_id=24)",
+    "template": "Ubuntu 24.04 with Claude Code (template_id=1189)",
+    "ssh_alias": "vicelle",
+    "ssh_target": "root@2.25.145.118",
+    "provisioned_at": "2026-05-28T19:08:35-04:00"
+  },
+  "kimi_api_key_status": "Vicelle-owned dedicated key (rotated 2026-05-29). Key value lives in /root/.hermes/.env on vicelle VPS, never elsewhere.",
+  "niche_specialist_agents": {
+    "compliance_safety_net": [
+      "healthcare-marketing-compliance",
+      "healthcare-customer-service",
+      "compliance-auditor",
+      "support-legal-compliance-checker"
+    ],
+    "brand_voice": [
+      "design-brand-guardian",
+      "design-visual-storyteller",
+      "design-whimsy-injector",
+      "marketing-content-creator"
+    ],
+    "email_retention": [
+      "engineering-email-intelligence-engineer",
+      "support-support-responder",
+      "product-feedback-synthesizer"
+    ],
+    "social": [
+      "marketing-instagram-curator",
+      "marketing-tiktok-strategist",
+      "marketing-reddit-community-builder",
+      "marketing-social-media-strategist"
+    ],
+    "paid_ads": [
+      "paid-media-creative-strategist",
+      "paid-media-ppc-strategist",
+      "paid-media-tracking-specialist",
+      "paid-media-auditor"
+    ],
+    "intel": [
+      "product-trend-researcher",
+      "marketing-agentic-search-optimizer"
+    ],
+    "ops": [
+      "support-analytics-reporter",
+      "support-executive-summary-generator",
+      "support-finance-tracker",
+      "support-infrastructure-maintainer"
+    ]
+  },
+  "starting_bench_total": 24
+}

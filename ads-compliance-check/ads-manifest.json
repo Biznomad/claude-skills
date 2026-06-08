@@ -1,0 +1,60 @@
+{
+  "$schema": "./schema/ads-manifest.schema.json",
+  "version": "1.0.0",
+  "brand": "Holistic Vitalis",
+  "niche": ["health", "hv_brand_specific"],
+  "changes": [
+    {
+      "id": "MM-71-A1-F1-H2",
+      "platform": "meta",
+      "account_id": "act_930457189958096",
+      "campaign_id": "120214000000000001",
+      "campaign_name": "HV VIDEO SCALE",
+      "change_type": "edit",
+      "creative_paths": [
+        "/Users/biznomad/Projects/Clients/Holistic-Vitalis/higgsfield-assets/2026-05/MM-71_A1-F1-H2_60-percent-filler.mp4"
+      ],
+      "copy": {
+        "primary_text": "Wildcrafted off the St Lucia coast. 90+ minerals in every spoonful. 200,000+ customers and counting.",
+        "headline": "Pick any 3 flavors, $60",
+        "description": "Atlanta same-day delivery via Roadie."
+      },
+      "budget": {
+        "previous_daily_usd": 150,
+        "new_daily_usd": 175,
+        "currency": "USD"
+      },
+      "image_spec": {
+        "width": 1080,
+        "height": 1350,
+        "aspect_ratio": "4:5"
+      },
+      "disclaimers_present": ["These statements have not been evaluated by the FDA."],
+      "notes": "F3 Demo composite. Real product PNG dropped onto AI background."
+    },
+    {
+      "id": "GA-MAY-13-A",
+      "platform": "google",
+      "account_id": "284-967-4182",
+      "campaign_id": "21000000001",
+      "campaign_name": "HV Search - Brand",
+      "change_type": "new",
+      "creative_paths": [],
+      "copy": {
+        "headlines": [
+          "Wildcrafted Sea Moss Gel",
+          "90+ Essential Minerals",
+          "Spring Batch — Limited Jars"
+        ],
+        "descriptions": [
+          "Pick any 3 flavors for $60. Lab tested. 200,000+ customers."
+        ]
+      },
+      "budget": {
+        "previous_daily_usd": 0,
+        "new_daily_usd": 85,
+        "currency": "USD"
+      }
+    }
+  ]
+}

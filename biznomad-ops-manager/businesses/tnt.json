@@ -1,0 +1,21 @@
+{
+  "slug": "tnt",
+  "agent_name": "NaReem",
+  "business_name": "Two & Through Junk Removal",
+  "server_ssh": "tnt",
+  "jump_host": "root@187.77.10.20",
+  "telegram_bot_token": "8720224642:AAGYzndsx6jb46GdAqzkIaV4UpAIsQv2Y8U",
+  "telegram_group_id": -5207375121,
+  "admin_telegram_ids": [5165464044],
+  "kimi_api_key_env": "TNT_KIMI_KEY",
+  "kimi_base": "https://api.kimi.com/coding/v1",
+  "kimi_model": "kimi-for-coding",
+  "kimi_user_agent": "claude-code/1.0",
+  "data_dir": "/root/two-and-through-ops/data",
+  "config_file": "/root/two-and-through-ops/config/business.json",
+  "install_dir": "/root/nareem",
+  "service_name": "nareem-bot",
+  "mission": "30-day sprint: ramp from 2-3 calls/wk to 24/7 truck running. $50-100/day ad budget approved.",
+  "daily_ad_cap": 100,
+  "_notes": "Kimi key is stored in /root/nareem/.env on the server; this file references the env-var name only for re-deploy convenience. Do not commit the key here."
+}
