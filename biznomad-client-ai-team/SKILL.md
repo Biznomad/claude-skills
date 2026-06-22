@@ -223,11 +223,25 @@ These are the gotchas from the Vicelle reference deployment — the scripts prev
 ☐ Commit clients/{slug}.json to a secrets vault (don't commit Telegram tokens to git)
 ```
 
+## Tiers including solo — this skill handles all of them
+
+`biznomad-client-ai-team` is the canonical deploy path for **all tiers**, including solo:
+
+| Tier | `"tier"` in config | Bots deployed | Pricing |
+|---|---|---|---|
+| **solo** | `"solo"` | ops + marketing (2 bots) | Starter $997/mo |
+| **standard** | `"standard"` | ops + social + intel (3 bots) | Growth $1,997/mo |
+| **full** | `"full"` | ops + social + marketing + intel (4 bots) | Scale $2,997/mo |
+| **enterprise** | `"enterprise"` | same as full + custom extensions | Custom |
+
+**Do NOT use `biznomad-ops-manager` for new deployments.** That is the legacy Python/Kimi
+prototype (NaReem/TNT). It is marked DEPRECATED in its own SKILL.md. For a 1-bot client, set
+`"tier": "solo"` in this skill's `clients/{slug}.json` instead.
+
 ## When NOT to use this skill
 
-- Single-bot deployments → use `biznomad-ops-manager` (the older single-bot skill) instead
-- Service businesses with one operator (e.g. junk removal) → `biznomad-ops-manager` is right-sized
 - Internal Biznomad bots (not client-facing) → use `master-gateway` profile or build directly
+- Running the ongoing post-deploy autonomous work loop → use `growth-loop` skill after deploy
 
 ## Reference deployments
 

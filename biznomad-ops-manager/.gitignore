@@ -1,0 +1,12 @@
+# Per-business config files contain Telegram bot tokens — never commit these
+businesses/*.json
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Secrets
+*.env
+.env

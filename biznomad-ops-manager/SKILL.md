@@ -3,6 +3,20 @@ name: biznomad-ops-manager
 description: Deploy a per-business AI operations manager bot to a server with full admin access behind a Telegram approval gate. Conversational, runs commands on owner's behalf, daily KPI digests. Reusable across Biznomad client businesses.
 ---
 
+> ⚠️ **LEGACY / REFERENCE BUILD**
+>
+> This skill is the original Python/Kimi single-bot prototype (NaReem for Two & Through Junk
+> Removal). It is kept as a historical reference for the approval-card protocol and KPI command
+> patterns that shaped the productized Hermes personas.
+>
+> **For any new client deployment, use `biznomad-client-ai-team --tier solo` instead.**
+> That path uses the Hermes framework (not a standalone Python bot), deploys via the same script
+> as all other tiers, and benefits from all future improvements to the template.
+>
+> The configs in `businesses/tnt.json` and `businesses/legacy-vault.json` are reference examples
+> with tokens scrubbed. The live TNT and Legacy Vault deployments are managed directly on their
+> respective servers.
+
 # biznomad-ops-manager
 
 Deploy a NaReem-style **AI operations manager** for any small business:

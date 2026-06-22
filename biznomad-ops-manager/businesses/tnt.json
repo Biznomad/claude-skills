@@ -4,7 +4,7 @@
   "business_name": "Two & Through Junk Removal",
   "server_ssh": "tnt",
   "jump_host": "root@187.77.10.20",
-  "telegram_bot_token": "8720224642:AAGYzndsx6jb46GdAqzkIaV4UpAIsQv2Y8U",
+  "telegram_bot_token": "<from BotFather — store real token in Bitwarden>",
   "telegram_group_id": -5207375121,
   "admin_telegram_ids": [5165464044],
   "kimi_api_key_env": "TNT_KIMI_KEY",

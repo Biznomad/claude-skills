@@ -1,0 +1,12 @@
+# Per-client config files contain Telegram bot tokens — never commit these
+clients/*.json
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Secrets
+*.env
+.env

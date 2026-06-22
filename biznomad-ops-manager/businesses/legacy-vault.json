@@ -4,7 +4,7 @@
   "business_name": "Legacy Vault (Power Without Limits)",
   "server_ssh": "umi",
   "jump_host": "root@187.77.10.20",
-  "telegram_bot_token": "8731093602:AAGwIgbOShZo0mrb0VMA0zI5jEPgktT4KpU",
+  "telegram_bot_token": "<from BotFather — store real token in Bitwarden>",
   "telegram_chat_id": 8344894716,
   "admin_telegram_ids": [8344894716, 5165464044],
   "kimi_api_key_env": "KIMI_API_KEY",
