@@ -109,6 +109,18 @@ Key parameters to maximize EMQ:
 | Learning Limited | <30% | 30-50% | >50% |
 | Budget per ad set | ≥5x CPA | 2-5x CPA | <2x CPA |
 
+## Budget-edit safety (operational landmine)
+
+When you edit a **live** campaign's budget mid-day, Meta treats the daily budget as a hard calendar-day cap. Setting it below what the campaign has **already spent today** halts ALL delivery until midnight — while the campaign still shows "Active" in Ads Manager.
+
+Real incident (2026-06-11): trimming HV ASC Core `52639162668484` from $800→$300/day at 11:33 ET, after ~$396 had already spent that morning → zero delivery for ~3 hours, sales stalled. "Active" ≠ delivering.
+
+**Before ANY mid-day budget cut:**
+1. Pull `date_preset=today` spend for the campaign; the new cap must be comfortably ABOVE today's spend (today_spend + expected evening spend). Meta pacing can front-load 30%+ of the daily budget into one good auction hour, so weekly-average spend massively understates intraday spend.
+2. Prefer applying cuts just after midnight ad-account time, when `today_spend = 0`.
+3. After any budget edit, verify **delivery within the hour** via the hourly insights breakdown — not just the status field.
+4. Check `effective_status` at **all three levels** (campaign, ad set, ad) after changes — someone may have manually paused a level in parallel.
+
 ## Output
 
 ### Meta Ads Health Score

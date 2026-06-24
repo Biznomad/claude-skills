@@ -46,6 +46,20 @@ Format-to-aspect-ratio mapping:
 - `portrait` → 3:4
 - `story` → 9:16
 
+## Label & product fidelity (critical for product ads)
+
+For product / jar / packaging ads, the model drifts to **plain, minimalist, or solid-color labels** that do NOT match the real product — the user rejects these ("this is not my product"). A generation is correct only if the label matches the real product's actual design.
+
+**Proven fix (flipped consistency from ~1/4 → 4/4):**
+1. **Reference = a SHARP per-flavor close-up, not a wide lineup.** In a wide group shot the labels are tiny and illegible, so the model invents simplified labels. Build a high-res (3–4k px) reference sheet where every label is fully legible.
+2. **Hard-lock the label color in the prompt.** Add a line like:
+   `ABSOLUTE REQUIREMENT: every label is a BLACK/dark-charcoal label — NEVER white, NEVER a solid flavor color. ALL labels MUST be black — if any is white or solid-colored it is wrong.`
+   Without this the model drifts to white or solid-color label backgrounds.
+3. **Spell out the required label elements** (border style, fruit illustration, brand wordmark, benefit bar, icon row) and add `copy exactly from the reference, do not simplify`.
+4. **Self-review bar = REJECT** any output with a plain / minimalist / white / solid-color label. "Says the right flavor name" is not enough — it must carry the full real label design.
+
+**Guaranteed 100% fidelity fallbacks:** composite real product cutouts into AI-generated backgrounds (PIL, $0) — or, via Higgsfield GPT Image 2, pass the real product photo as `--image` every time with `keep each jar IDENTICAL — do not redesign labels`.
+
 ## Workflow
 
 1. **Kill existing Chrome processes** to avoid Playwright conflicts
