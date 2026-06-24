@@ -1,0 +1,98 @@
+{
+  "_comment_": "Schema for empire-builder client config. Copy to clients/<slug>.json. Do NOT commit real configs with Telegram tokens to a public repo.",
+  "_version_": "1.0",
+  "slug": "REQUIRED — kebab-case, unique per client, e.g. 'manifestation-by-sarah'",
+  "community_name": "REQUIRED — display name of the community",
+  "slug_init": "REQUIRED — 2-3 uppercase initials, e.g. 'MBS'",
+  "interview_complete": false,
+  "interview_progress": {
+    "last_question": 0,
+    "answers_so_far": {}
+  },
+
+  "founder": {
+    "name": "REQUIRED — first name",
+    "telegram_id": null,
+    "timezone": "America/Chicago"
+  },
+
+  "community": {
+    "topic": "REQUIRED — one-sentence description of what the community is about",
+    "audience": "REQUIRED — who the ideal member is (specific, not 'everyone')",
+    "promise": "REQUIRED — the transformation/outcome members get",
+    "founder_story": "REQUIRED — why the founder is building this (fuels all content)",
+    "niche_tags": []
+  },
+
+  "offer": {
+    "model": "paid",
+    "price_per_month": null,
+    "skool_tier": "basic",
+    "has_free_tier": false,
+    "offer_ladder": [
+      "free lead magnet → paid community → 1:1 or group coaching"
+    ]
+  },
+
+  "channels": ["instagram", "tiktok", "youtube", "x"],
+  "handles": {
+    "instagram": null,
+    "tiktok": null,
+    "youtube": null,
+    "x": null,
+    "skool": null
+  },
+  "existing_assets": "OPTIONAL — what's already live (bios, website, email list size)",
+
+  "cadence": {
+    "hours_per_week": null,
+    "posts_per_week": null,
+    "content_batch_days": "Sunday"
+  },
+
+  "brand": {
+    "voice": "REQUIRED — 3-5 adjectives, e.g. 'warm, direct, spiritually grounded, aspirational'",
+    "palette": {
+      "primary": null,
+      "accent": null,
+      "neutral": "#FFFFFF"
+    },
+    "emoji_rule": "use sparingly — 1-2 per post max",
+    "keywords_use": [],
+    "keywords_avoid": []
+  },
+
+  "skool_config": {
+    "community_url": null,
+    "is_live": false,
+    "membership_price": null,
+    "classroom_modules": [],
+    "welcome_dm_written": false
+  },
+
+  "loop_state": {
+    "session_state_path": null,
+    "loop_config_path": null,
+    "current_track": "a",
+    "member_count_last": 0,
+    "content_pieces_shipped": 0
+  },
+
+  "telegram": {
+    "bot_token_env_path": null,
+    "dm_chat_id": null
+  },
+
+  "safety": {
+    "live_skool_confirmed": false,
+    "no_auto_post": true,
+    "secrets_never_touch": ["passwords", "payment info"],
+    "notes": "OPTIONAL — any specific constraints"
+  },
+
+  "packaging": {
+    "tier": "solo",
+    "setup_date": null,
+    "resale_price": null
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "_comment_": "Worked example: manifestation + entrepreneur Skool community (Ashley's wife). This is the reference config — real client configs live alongside this but are gitignored.",
+  "slug": "manifest-and-thrive",
+  "community_name": "Manifest & Thrive",
+  "slug_init": "MAT",
+  "interview_complete": true,
+  "interview_progress": {
+    "last_question": 10,
+    "answers_so_far": {}
+  },
+
+  "founder": {
+    "name": "Your Name",
+    "telegram_id": null,
+    "timezone": "America/Chicago"
+  },
+
+  "community": {
+    "topic": "A Skool community where women learn to combine manifestation, mindset, and real business strategy to build a life and income they love.",
+    "audience": "Women 25-45 who believe in the law of attraction but feel stuck — they're doing the vision boards and affirmations but haven't cracked the code on turning that energy into a real business or income stream.",
+    "promise": "In 90 days you'll have a clear business idea, your first paying clients or customers, and a manifestation practice that's actually backed by strategy — not just vibes.",
+    "founder_story": "I spent years believing I could manifest anything I wanted, but I was missing the bridge between the spiritual side and the practical business side. Once I combined both, everything clicked. I built [X] while also deepening my spiritual practice. I want to show other women they don't have to choose between woo and hustle.",
+    "niche_tags": ["manifestation", "entrepreneurship", "law of attraction", "women in business", "mindset", "spirituality"]
+  },
+
+  "offer": {
+    "model": "paid",
+    "price_per_month": 47,
+    "skool_tier": "basic",
+    "has_free_tier": false,
+    "offer_ladder": [
+      "FREE lead magnet: '5-Day Manifest Your Business Challenge' PDF",
+      "PAID community: Manifest & Thrive Skool ($47/mo) — courses + community + live calls",
+      "HIGH TICKET: 1:1 coaching or group mastermind ($997-$3,000)"
+    ]
+  },
+
+  "channels": ["instagram", "tiktok", "youtube", "x"],
+  "handles": {
+    "instagram": "@manifestandthrive",
+    "tiktok": "@manifestandthrive",
+    "youtube": "Manifest & Thrive",
+    "x": "@manifestthrive",
+    "skool": "manifest-and-thrive"
+  },
+  "existing_assets": "Starting fresh — no existing following. Has a personal Instagram (private). No email list yet.",
+
+  "cadence": {
+    "hours_per_week": 5,
+    "posts_per_week": 3,
+    "content_batch_days": "Sunday"
+  },
+
+  "brand": {
+    "voice": "warm, honest, spiritually grounded, practical, empowering — like your most successful spiritual friend who actually gives you real advice",
+    "palette": {
+      "primary": "#4A2F7A",
+      "accent": "#D4A843",
+      "neutral": "#FAF8F5"
+    },
+    "emoji_rule": "use intentionally — ✨ 🙏 💛 are on-brand; no clutter",
+    "keywords_use": ["aligned", "intentional", "abundant", "practical", "real", "grounded"],
+    "keywords_avoid": ["hustle", "grind", "boss babe", "manifest in 24 hours", "toxic positivity"]
+  },
+
+  "skool_config": {
+    "community_url": "https://www.skool.com/manifest-and-thrive",
+    "is_live": false,
+    "membership_price": 47,
+    "classroom_modules": [
+      "Module 1: Your Manifestation Foundation (the missing piece)",
+      "Module 2: The Business Idea That's Already Inside You",
+      "Module 3: Your First Offer — Simple, Sellable, Aligned",
+      "Module 4: Showing Up Online Without Burning Out",
+      "Module 5: Your First 10 Paying Clients"
+    ],
+    "welcome_dm_written": false
+  },
+
+  "loop_state": {
+    "session_state_path": "~/.claude/skills/empire-builder/clients/manifest-and-thrive/SESSION_STATE.md",
+    "loop_config_path": "~/.claude/skills/empire-builder/clients/manifest-and-thrive/loop-config.md",
+    "current_track": "a",
+    "member_count_last": 0,
+    "content_pieces_shipped": 0
+  },
+
+  "telegram": {
+    "bot_token_env_path": null,
+    "dm_chat_id": null
+  },
+
+  "safety": {
+    "live_skool_confirmed": false,
+    "no_auto_post": true,
+    "secrets_never_touch": ["passwords", "payment info", "Stripe keys"],
+    "notes": "All content staged to outbox/ — founder publishes manually. No auto-posting."
+  },
+
+  "packaging": {
+    "tier": "solo",
+    "setup_date": "2026-06-24",
+    "resale_price": null
+  }
+}

@@ -1,0 +1,13 @@
+# Real client configs contain Telegram tokens — never commit
+clients/*/
+!clients/_schema.json
+!clients/example.json
+
+# Client workspaces
+clients/*/outbox/
+clients/*/.planning/
+clients/*/SESSION_STATE.md
+clients/*/metrics.json
+clients/*/loop-config.md
+clients/*/prd.md
+clients/*/loop-spec.md
