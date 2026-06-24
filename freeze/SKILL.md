@@ -1,0 +1,1 @@
+/Users/biznomad/.claude/skills/gstack/freeze/SKILL.md

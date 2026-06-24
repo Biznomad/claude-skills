@@ -1,0 +1,1 @@
+/Users/biznomad/.claude/skills/gstack/document-generate/SKILL.md

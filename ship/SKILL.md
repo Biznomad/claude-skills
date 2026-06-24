@@ -1,0 +1,1 @@
+/Users/biznomad/.claude/skills/gstack/ship/SKILL.md
