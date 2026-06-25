@@ -25,18 +25,74 @@ exists, ask the 8 config questions (below) once, write the config, then proceed.
 
 The config defines: **name · asset goal · deploy target · the 3 rotation tracks ·
 memory file + state file paths · Telegram bot-token source + DM chat-id · brand/voice ·
-safety constraints.**
+safety constraints · mode + budget/threshold (see §0.5).**
 
-## 1. The loop (every single run)
+## 0.5 Modes + the self-replenishing engine (READ THIS — it's what makes loops run longer)
 
-1. **Read state.** Read the project memory file and the `SESSION_STATE` scratchpad
-   (newest entries at top). This is non-negotiable — it prevents re-doing work and tells
-   you the last track shipped.
-2. **Pick the track.** Rotate a → b → c. The last state entry ends with
-   "Next loop track: (x)" — do that one.
-3. **Pick the single highest-value increment** in that track. One thing. Not three.
-   Bias to what a buyer of this asset would pay more for, or what removes real operator
-   friction.
+Loops dry-stop early when they exhaust the *obvious* backlog. To run longer and keep
+adding value, the loop **replenishes its own backlog** (audits the product → generates +
+scores new tasks) and stops on **value/budget**, not on "ran out of first ideas". Pick a
+**mode** at launch: `/growth-loop <business> --mode <mode>` (default `copilot`).
+
+### Modes (the versions)
+| Mode | Acts each cycle | Stops when | Models |
+|------|-----------------|-----------|--------|
+| `advisor` (L1) | Audits product, generates + ranks next-best tasks into the backlog. **Builds nothing** — proposes only. | one pass | single |
+| `copilot` (L2, default) | Builds + commits each increment, self-QAs. Outward actions (deploy / public post / send) wait for the human's tap. | backlog value-dry **or** budget cap | single |
+| `autonomous` (L3) | Self-replenishes, builds, an **independent verifier** confirms real value, ships all but hard-denied. Unattended. | N value-dry cycles **or** token cap | single |
+| `turbo` (L3+) | Same as autonomous but **parallel + model-tiered** (see Turbo below). | same | Opus→Sonnet→Haiku |
+
+If `--mode` is omitted, use the config's `default_mode`. **Hard-denylist applies in EVERY
+mode** (money, secrets, infra/DNS, live sends, public posts, destructive ops — see
+`loop-budget-<business>.md`). Honor the **kill switch** (`state: PAUSED`) at the start of
+every cycle.
+
+### The 6-stage engine (every mode, each cycle)
+1. **Read state** — `backlog-<business>.md` + `loop-run-log-<business>.md` + memory
+   (`SESSION_STATE` + config State). Anti-redo; check the kill switch + remaining budget.
+2. **Replenish** — run the opportunity-finder: audit the live product/service for the next
+   improvement (gaps, friction, weak spots), pull from cleared handoff unlocks, ensure all
+   3 tracks keep progressing. Append NEW candidates to the backlog (dedupe on `id`).
+3. **Score** — for each candidate: `value = round((impact + buyer_value + reach)/effort,1)`,
+   each factor 1–5 (so value ranges ~0.6–15). Re-rank. Candidates `< value_threshold` are
+   NOT built.
+4. **Build** — take the top eligible task (`status: idea`, `value ≥ threshold`). One in
+   single-stream modes; several in `turbo`. (Then §1's build/deploy/verify steps.)
+5. **Verify (maker/checker)** — in `autonomous`/`turbo`, a **separate verifier sub-agent**
+   (spawn via Agent/Workflow, **default stance REJECT**) confirms the increment is real
+   value + 0 errors before it counts. Reject → set the task back to `idea` with notes, do
+   NOT ship. `advisor`/`copilot` use the operator's own QA (you) as the checker.
+6. **Log + ship + budget-check** — append a `loop-run-log` JSON line, post the changelog
+   (§3), update the backlog status, then evaluate the **stop condition**.
+
+### Stop condition (value-threshold + budget cap)
+Stop, post the dry-stop/handoff card, and **do NOT schedule the next cycle** when EITHER:
+- **value-dry:** `dry_cycles_N` consecutive cycles produced no candidate `≥ value_threshold`
+  (default N=2) — value-defined dry, the loop genuinely served the product; or
+- **budget cap:** cumulative `tokens_estimate` ≥ `token_budget`; or kill switch `PAUSED`,
+  or `max_cycles` hit.
+This is the mechanism that runs longer: replenish+score keeps surfacing real work until
+the asset is well-served, then stops on quality — never on filler.
+
+### Turbo (opusplan tiering)
+Only `turbo` fans out. The **Opus** main loop does stages 1–3 inline (read, replenish,
+rank), then invokes `templates/turbo-workflow.js` via the Workflow tool to fan out:
+**Sonnet** maker sub-agents (one per eligible task, ≤ `max_parallel`), each gated by an
+independent **Sonnet** verifier (default-reject). **Haiku** does the cheap high-volume work
+(scoring candidates, tofu/console-error/link scans, run-log writes, formatting). Opus then
+consumes results → run-log + changelog + backlog updates + stop-call. Tier deliberately:
+expensive model plans, cheap models do volume.
+
+## 1. The per-increment steps (stage 4–6 detail, every mode)
+
+1. **Read state.** Read the project memory file, `SESSION_STATE`, the backlog, and the
+   run-log (stage 1). Non-negotiable — prevents re-doing work.
+2. **Pick the task** — the top eligible item from the **backlog** (stage 3/4 above):
+   highest `value` with `status: idea` and `value ≥ threshold`. Use track rotation
+   (a→b→c) only as a tiebreaker so all three tracks keep progressing; "Next loop track"
+   in state is the tiebreaker hint, not the selector.
+3. **One thing, not three.** Build the single top task (turbo: the top `max_parallel`).
+   Bias to what a buyer pays more for or what removes real operator friction.
 4. **Think before heavy work.** For a new tool/migration/non-trivial feature, state the
    approach in one line first.
 5. **Build it** — idempotent, reversible, safe (see Lessons).

@@ -19,6 +19,13 @@ Map a/b/c to this business's real value levers. Examples:
 - **(b) Product / UX:** <the operator console / customer experience / dashboards>
 - **(c) Showcase reporting:** <visual proof-of-value to the owner/buyer>
 
+## Mode + engine (see SKILL §0.5)
+- **default_mode:** copilot         # advisor | copilot | autonomous | turbo
+- **Budget file:** `<memory-dir>/loop-budget-<business>.md` (token_budget, value_threshold,
+  dry_cycles_N, max_parallel, kill switch, hard denylist) — copy `templates/loop-budget.md`.
+- **Backlog file:** `<memory-dir>/backlog-<business>.md` — copy `templates/backlog.md`.
+- **Run-log file:** `<memory-dir>/loop-run-log-<business>.md` — copy `templates/loop-run-log.md`.
+
 ## Memory
 - **Project memory file:** <path to the durable project notes>
 - **State scratchpad:** <path to SESSION_STATE (prepend newest H2 each run)>
