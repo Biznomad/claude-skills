@@ -179,6 +179,20 @@ Read the Skool playbook for Skool-specific guidance:
 Read the full loop engine:
 `@~/.claude/skills/empire-builder/references/growth-loop-engine.md`
 
+**Track (a) — Growth-Hacker mode (Inevitably Hers):**
+When the rotation lands on track (a) for the `inevitably-hers` client, read the Growth
+Hacker engine reference FIRST:
+`@~/.claude/skills/empire-builder/references/growth-hacker-engine.md`
+
+This replaces the standard track-(a) "generate a content batch" with a measured experiment
+cycle. The rotation, run-numbering, SESSION_STATE format, and Telegram card are all
+preserved — the cycle just wraps the deliverable in hypothesis + metric + ICE score + ledger
+entry. Nothing auto-posts. The outbox file is the only thing Ashley publishes manually.
+
+After the GH cycle completes, run:
+`bash inevitably-hers-affiliate/scripts/push-gh-state.sh`
+(in addition to the standard `push-os-state.sh` for the loop scalars and asset).
+
 **Ten-step loop (every run):**
 
 1. **Read state** — `clients/<slug>/SESSION_STATE.md` + `clients/<slug>/loop-config.md`.
