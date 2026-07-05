@@ -1,0 +1,30 @@
+{
+  "_comment": "Registry: brand slug -> project path + Klaviyo account. Add a brand here when onboarded (Phase 2/3). NEVER mix Klaviyo accounts across brands.",
+  "brands": {
+    "holistic-vitalis": {
+      "name": "Holistic Vitalis",
+      "project_path": "/Users/biznomad/Projects/Clients/Holistic-Vitalis",
+      "klaviyo_account": "WXuDSN",
+      "status": "active",
+      "onboarded": "2026-07-03"
+    },
+    "vicelle": {
+      "name": "Vicelle Naturals",
+      "project_path": "/Users/biznomad/Projects/Clients/Vicelle-Naturals",
+      "klaviyo_account": "V8fsvS",
+      "status": "pending-onboarding"
+    },
+    "dlluxe": {
+      "name": "D'Lluxe Scrubs",
+      "project_path": "/Users/biznomad/Projects/Clients/DLluxe-Scrubs",
+      "klaviyo_account": null,
+      "status": "pending-onboarding"
+    },
+    "liquid-wizdom": {
+      "name": "Liquid Wizdom",
+      "project_path": "/Users/biznomad/Projects/Clients/Liquid-Wizdom",
+      "klaviyo_account": null,
+      "status": "pending-onboarding"
+    }
+  }
+}

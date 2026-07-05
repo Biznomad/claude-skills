@@ -9,7 +9,7 @@ license: MIT
 
 Single-command full-site audit. Catches conflicting messaging, broken functionality, conversion blockers, CRO gaps, and compliance violations across the customer-facing surface. Auto-fixes P1 (revenue / data correctness / compliance) issues in the same pass with explicit user approval and rollback commands.
 
-Coverage now also includes the **live functional buy-path** (2026-06-08 hardening): cart-type/drawer friction, custom add-to-cart handlers that hard-redirect to `/cart` and bypass the drawer, JS console/exception errors on PDP/cart/checkout, archived/unpublished variants wired into live add-to-cart UI, promo↔active-discount mechanism mismatches, duplicate internal products with reachable standalone PDPs, destructive cart-clear urgency timers, and false subscription free-shipping claims. An optional Wave 0 pulls PostHog signal (funnel leaks, rageclicks, exceptions, deploy-regression detection) to aim the audit at the real leaks.
+Coverage now also includes the **live functional buy-path** (2026-06-08 hardening): cart-type/drawer friction, custom add-to-cart handlers that hard-redirect to `/cart` and bypass the drawer, JS console/exception errors on PDP/cart/checkout, archived/unpublished variants wired into live add-to-cart UI, promo↔active-discount mechanism mismatches, duplicate internal products with reachable standalone PDPs, destructive cart-clear urgency timers, and false subscription free-shipping claims. **Wave 0** pulls PostHog behavioral signal (funnel leaks, rageclicks, JS exceptions, CVR/deploy-regression detection, event-name mismatches) via the bundled `scripts/posthog_signal.py` whenever the client has PostHog, aiming the audit at the real leaks before a single page is sampled.
 
 Built from the HV audit on 2026-05-21 that found and fixed: a missing product template (lost $60 bundle UX), fashion placeholder testimonials on the cart page, Lorem ipsum reviews on a top PDP, "Boosts Immunity" FTC violations in 24 places, "Boosts energy" in 15 places, a stale shipping policy page, undisclosed subscription auto-enrollment, a 404'd product URL with active ad traffic, and a Christmas promo still running in May (with a typo). All in one pass.
 
@@ -38,6 +38,20 @@ This skill is fully reusable. Each client requires a one-time config that is sto
 | `SHOPIFY_STORE` | e.g. `mystore.myshopify.com` |
 | `SHOPIFY_TOKEN` | Shopify Admin → Apps → private app token (read_products + read_themes + read_content + write_themes) |
 | `THEME_ID` | Admin API `GET /themes.json`, `role: main` |
+
+### Optional inputs — PostHog (enables Wave 0)
+If the store runs PostHog, supply these and Wave 0 runs automatically. Store them in the client's
+`posthog.env` (chmod 600) and `set -a; source <client>/posthog.env; set +a` before the run. If the
+key/project are absent, the skill skips Wave 0 and proceeds with the static + browser waves.
+
+| Env var | Where to get it |
+|---------|-----------------|
+| `POSTHOG_PERSONAL_API_KEY` | PostHog → Settings → Personal API keys (`phx_…`, all-access read). Treat like a password. |
+| `POSTHOG_PROJECT_ID` | PostHog project settings (numeric, e.g. `453359`) |
+| `POSTHOG_HOST` | App host for HogQL: `https://us.posthog.com` (US) / `https://eu.posthog.com` (EU). **NOT** the ingest host `us.i.posthog.com` — the script auto-corrects that, but set it right. |
+| `POSTHOG_DATE_FROM` / `POSTHOG_DATE_TO` | optional window (default last 14 days) |
+| `POSTHOG_DEPLOY_DATE` | optional `YYYY-MM-DD` of a suspected theme deploy to annotate on the CVR trend for regression detection |
+| `POSTHOG_FUNNEL_EVENTS` | optional comma-list to override the default funnel event order (default `$pageview,product_viewed,product_added_to_cart,checkout_started,payment_info_submitted,purchase`) |
 
 ### Config-file convention
 
@@ -164,11 +178,13 @@ Cross-funnel divergence check: do LP claims (price, perks, ship, guarantee, subs
 ├── PUNCH-LIST.md              # actionable list, [x] for done, rollback per fix
 ├── CRO-SCORECARD.md           # Wave 3 per-page scoring
 ├── P1-EXECUTION.md            # what auto-fixed, what skipped, all rollbacks
+├── wave0-posthog.md           # Wave 0 PostHog signal (when client has PostHog)
 ├── content.md, mc-feed.md, links.md, theme-scripts.md, pricing.md, messaging.md
 ├── wave1ac-summary.md, wave1bd-summary.md, wave1ef-summary.md
 ├── wave2-summary.md, wave3-summary.md
 ├── live/<page-slug>/{desktop.png, mobile.png, notes.md}
 └── scripts/
+    ├── posthog_signal.py
     ├── pricing-consistency.py
     ├── messaging-consistency.py
     ├── fetch_theme_assets.py
@@ -258,6 +274,8 @@ Verify every "free shipping" claim against the *real* rule (usually a single `$X
 ## Reusable scripts
 
 Bundled with this skill in `scripts/` — fully self-contained, no HV-specific paths:
+- `posthog_signal.py` — Wave 0 behavioral-signal pull (funnel, rageclicks, exceptions, CVR/deploy-regression, event-name mismatch); stdlib-only, exits 2 if creds absent so the orchestrator skips Wave 0 cleanly
+  - Config: `POSTHOG_PERSONAL_API_KEY`, `POSTHOG_PROJECT_ID`, `POSTHOG_HOST`, `OUTPUT_DIR`; optional `POSTHOG_DATE_FROM`/`_TO`, `POSTHOG_DEPLOY_DATE`, `POSTHOG_FUNNEL_EVENTS`, `POSTHOG_BENIGN_EXC`
 - `pricing-consistency.py` — sitewide grep for prices that contradict the canonical model
   - Config: `SHOPIFY_STORE`, `THEME_ID`, `OUTPUT_DIR`, `CACHE_DIR`, `CANONICAL_PRICING_JSON`
 - `messaging-consistency.py` — banned-phrase scan + review-count + star-rating divergence
@@ -297,28 +315,53 @@ Cache stickiness will produce inconsistent results across multi-trial sampling. 
 - **Don't edit a stale local copy of an asset and push it — you'll silently revert an earlier fix.** A later "drawer fix" pushed a pre-shipping-fix copy of `sale-mix-match-toggle.liquid` and reverted that day's approved shipping-claim correction. ALWAYS re-pull the live asset (`GET .../assets.json`) immediately before editing, or merge onto the current live source. When two fixes touch the same file in one session, the second push must include the first. (Caught only because the audit re-scanned the live source.) (2026-06-08)
 - **Don't trust a single-pass static scan's exact match counts blindly.** The FTC scan flagged ~7 blog articles; the actual fix pass found 17 (e.g. "hormonal balance" 9× in one article). Re-scan EVERY article's body for the banned set during the fix pass, not just the flagged handles. (2026-06-08)
 
-## Optional Wave 0 — PostHog signal pull (when the client has PostHog)
+## Wave 0 — PostHog signal pull (runs first whenever the client has PostHog)
 
-If the store runs PostHog (check theme.liquid for `posthog.init`), pull real behavioral signal *before* the static waves — it points the audit straight at the live leaks:
-- **Funnel** (visitor → product_viewed → add_to_cart → checkout_started → purchase): find the worst-converting step. A low ATC→checkout step = a cart/offer problem to chase in Waves 2-3.
-- **Rageclicks** (`$rageclick`): group by `$el_text` + `$current_url`. Dead/broken controls surface here instantly (a dead `−` stepper, a non-responsive toggle, a broken bundle card).
-- **Exceptions** (`$exception`, if `capture_exceptions` on): group by `$exception_values[1]` + page; real JS breakers, minus the benign noise.
-- **Deploy-regression signature:** if conversion fell off a cliff on a specific date with **CTR/CPM/frequency flat** (pull from Meta if available) but click→buy CVR down, the cause is a **site deploy**, not ads. Cross-check theme asset `updated_at` clustering around that date (a dated theme name like `HV-Live-2026-05-27` + a batch of cart/PDP/CSS files stamped that day = the smoking gun). HogQL query host is `https://us.posthog.com` (NOT the ingest host `us.i.posthog.com`).
+This is now a **first-class wave**, not an afterthought. When `POSTHOG_PERSONAL_API_KEY` + `POSTHOG_PROJECT_ID`
+are present (check theme.liquid for `posthog.init` to confirm it's installed), run the bundled
+**`scripts/posthog_signal.py`** *before* the static waves — it points the audit straight at the live leaks
+and lets Waves 2-3 spend their browser budget where the money is actually leaking instead of sampling blind.
 
-After fixes ship, the same signals are the *bulletproofing* layer: alerts on funnel-CVR/revenue/error breach (a watchdog that pings the client's ops channel) would catch the next regression in hours, not weeks. Offer it as a follow-up.
+### Run it
+```bash
+set -a; source <client-project-root>/posthog.env; set +a
+OUTPUT_DIR=<client-dir>/audit-YYYY-MM-DD \
+  python3 ~/.claude/skills/Biznomad-shopify-cro-audit/scripts/posthog_signal.py
+# optional: POSTHOG_DATE_FROM/_TO to widen the window, POSTHOG_DEPLOY_DATE=YYYY-MM-DD to flag a deploy
+```
+It is stdlib-only (no pip deps), fully env-driven (no client paths hardcoded), and writes
+`wave0-posthog.md` into `OUTPUT_DIR`. If creds are missing it exits 2 — the orchestrator should
+treat that as "skip Wave 0" and proceed, not as a hard failure.
+
+### What it pulls (and why each matters)
+- **Funnel** (`$pageview → product_viewed → add_to_cart → checkout_started → payment_info_submitted → purchase`): per-step counts + the auto-flagged **worst-converting step**. A low ATC→checkout step = a cart/offer problem to chase in Waves 2-3; a low checkout→purchase = a checkout-app/express-pay issue.
+- **Event inventory + name-mismatch check:** lists top events and flags any configured funnel event with **zero volume** — catches the classic `add_to_cart` vs `product_added_to_cart` instrumentation gap that silently starves Meta CAPI / Klaviyo flows.
+- **Rageclicks** (`$rageclick`): grouped by `$el_text` + `$current_url`. Dead/broken controls surface here instantly (a dead `−` stepper, a non-responsive toggle, a broken bundle card) → hand the top targets to Wave 2 to confirm functionally.
+- **Exceptions** (`$exception`, if `capture_exceptions` on): grouped by type/message + page, benign noise filtered (`_AutofillCallbackHandler`, `Load failed`, `Script error.`, `NetworkError` by default; override via `POSTHOG_BENIGN_EXC`). Any non-benign error on a product/cart/checkout page is a P1 candidate.
+- **CVR trend + deploy-regression signature:** daily purchase/pageview CVR. Set `POSTHOG_DEPLOY_DATE` to get a pre/post split — if conversion fell off a cliff on that date with **CTR/CPM/frequency flat** (pull from Meta if available) but click→buy CVR down, the cause is a **site deploy**, not ads. Cross-check theme asset `updated_at` clustering around that date (a dated theme name like `HV-Live-2026-05-27` + a batch of cart/PDP/CSS files stamped that day = the smoking gun).
+
+**Gotcha baked into the script:** HogQL query host is the APP host `https://us.posthog.com` (EU: `https://eu.posthog.com`), **NOT** the ingest host `us.i.posthog.com`. The script auto-corrects an ingest host, but set it correctly in `posthog.env`.
+
+### Feed Wave 0 into the rest of the audit
+- Wave 2 (browser) prioritizes the **rageclick targets** and **funnel leak step** for functional E2E.
+- Wave 3 (CRO) weights its scoring toward the worst funnel step.
+- Wave 4 (synthesis) promotes any **non-benign exception on a money page** and any **deploy-regression** straight to P1.
+
+After fixes ship, the same signals are the *bulletproofing* layer: alerts on funnel-CVR/revenue/error breach (a watchdog that pings the client's ops channel) catch the next regression in hours, not weeks. For HV that watchdog already exists (`hv-funnel-guardian.timer` on Vitalis). Offer the equivalent as a follow-up for clients that lack it.
 
 ## Sequencing (single-message reference)
 
 1. Verify scripts + theme source present (Bash).
 2. Create `<client>/audit-YYYY-MM-DD/` and `/tmp/<audit-dir>-backup/`.
-3. `TaskCreate` × 12 (one per wave step + auto-fix + verify + skill-package follow-up).
-4. Wave 1 (3 parallel sonnet subagents).
-5. Wave 2 + Wave 3 (2 parallel sonnet subagents, after Wave 1).
-6. Opus synthesis: read 5 summary files, write REPORT + PUNCH-LIST + CRO-SCORECARD.
-7. `AskUserQuestion` × ≤4: bulk approve + per-item decisions.
-8. Auto-fix sonnet subagent with full P1 spec + backups.
-9. Verification HEAD-checks (Bash).
-10. Mark all tasks complete.
+3. `TaskCreate` × 13 (Wave 0 + one per wave step + auto-fix + verify + skill-package follow-up).
+4. **Wave 0 (if PostHog creds present):** `source posthog.env` + run `scripts/posthog_signal.py` → `wave0-posthog.md`. Read it; carry the worst funnel step + top rageclick targets + non-benign exceptions forward as Wave 2/3 priorities. If it exits 2 (no creds), skip and note "no PostHog".
+5. Wave 1 (3 parallel sonnet subagents).
+6. Wave 2 + Wave 3 (2 parallel sonnet subagents, after Wave 1; seed them with Wave 0 priorities).
+7. Opus synthesis: read Wave 0 + 5 summary files, write REPORT + PUNCH-LIST + CRO-SCORECARD.
+8. `AskUserQuestion` × ≤4: bulk approve + per-item decisions.
+9. Auto-fix sonnet subagent with full P1 spec + backups.
+10. Verification HEAD-checks (Bash).
+11. Mark all tasks complete.
 
 ## Companion / chained skills
 
