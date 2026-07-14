@@ -1,0 +1,3 @@
+[submodule "seo-geo-aeo-engine"]
+	path = seo-geo-aeo-engine
+	url = https://github.com/Biznomad/seo-geo-aeo-engine.git
