@@ -49,7 +49,8 @@ every cycle.
 
 ### The 6-stage engine (every mode, each cycle)
 1. **Read state** — `backlog-<business>.md` + `loop-run-log-<business>.md` + memory
-   (`SESSION_STATE` + config State). Anti-redo; check the kill switch + remaining budget.
+   (`SESSION_STATE-<business>.md` + config State). Anti-redo; check the kill switch +
+   remaining budget. Read the **per-business** state file, NOT the shared `SESSION_STATE.md`.
 2. **Replenish** — run the opportunity-finder: audit the live product/service for the next
    improvement (gaps, friction, weak spots), pull from cleared handoff unlocks, ensure all
    3 tracks keep progressing. Append NEW candidates to the backlog (dedupe on `id`).
@@ -85,8 +86,8 @@ expensive model plans, cheap models do volume.
 
 ## 1. The per-increment steps (stage 4–6 detail, every mode)
 
-1. **Read state.** Read the project memory file, `SESSION_STATE`, the backlog, and the
-   run-log (stage 1). Non-negotiable — prevents re-doing work.
+1. **Read state.** Read the project memory file, `SESSION_STATE-<business>.md`, the backlog,
+   and the run-log (stage 1). Non-negotiable — prevents re-doing work.
 2. **Pick the task** — the top eligible item from the **backlog** (stage 3/4 above):
    highest `value` with `status: idea` and `value ≥ threshold`. Use track rotation
    (a→b→c) only as a tiebreaker so all three tracks keep progressing; "Next loop track"
@@ -104,9 +105,21 @@ expensive model plans, cheap models do volume.
    - Browser-verify any UI change live (cache-bust with `?v=<ts>`), confirm **0 console
      errors**, and read back the actual DOM/state — don't trust timing.
    - Hit new backend routes with real calls; check edge cases degrade gracefully.
-8. **Update memory** — prepend a dated H2 to `SESSION_STATE`, append a detail block to
+8. **Update memory** — prepend a dated H2 to **`SESSION_STATE-<business>.md`** (the
+   per-business file, never the shared `SESSION_STATE.md`), append a detail block to
    the project file, end with "Next loop track: (next)". Update any tool/capability
    registry (e.g. the bot's SOUL.md). Convert relative dates to absolute.
+
+   **Do NOT write a state entry for a no-op tick.** If the gate was closed, or the cycle
+   did nothing but a stability/health check with no build and no change, write NOTHING to
+   any state file — the run-log already records the tick. State entries are for work that
+   actually happened. (Previously ~65% of entries were "gate closed — stability check only"
+   noise, which evicted every other business from the shared file's rotation window.)
+
+   **Promote to the shared file only on a milestone** — a shipped feature, a launch, a
+   revenue/status change, or anything another operator would need to know. Prepend a
+   2–4 bullet summary to `SESSION_STATE.md`. Routine increments stay in the per-business
+   file only.
 9. **Post the visual changelog** to the Telegram DM — a branded card image + a caption
    + **InlineKeyboardMarkup buttons with working callbacks** (mandatory; see §3).
 10. **Wrap up in ~6–10 lines.** Detail lives in memory + the changelog, not the chat.

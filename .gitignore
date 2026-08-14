@@ -21,3 +21,7 @@ email-marketing-bible/
 *.avi
 *.zip
 .gstack/
+
+# Editor/backup cruft
+*.bak-*
+*.bak
