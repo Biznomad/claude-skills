@@ -309,7 +309,7 @@ Quick validation of stored API tokens and credentials.
 
 ```bash
 # Google API Key (free tier, text-gen only)
-curl -s "https://generativelanguage.googleapis.com/v1beta/models?key=AIzaSyBifKna_6ZFmxwAp0WLKG8FKYAtxlxHGB0" | python3 -c "
+curl -s "https://generativelanguage.googleapis.com/v1beta/models?key=${GOOGLE_API_KEY}" | python3 -c "
 import sys, json
 r = json.load(sys.stdin)
 if 'error' in r:
