@@ -1,0 +1,4 @@
+interface:
+  display_name: "Growth Evidence and Reactivation"
+  short_description: "Verify revenue data and plan acquisition and win-back"
+  default_prompt: "Use $growth-evidence-and-reactivation to build an evidence-backed acquisition and customer reactivation package for this business."
