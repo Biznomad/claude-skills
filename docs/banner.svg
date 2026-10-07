@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-label="Biznomad Claude Skills">
+ <rect width="1280" height="320" rx="20" fill="#101519"/>
+ <path d="M960 0V320M1040 0V320M1120 0V320M1200 0V320M880 80H1280M880 160H1280M880 240H1280" stroke="#263238" stroke-width="1"/>
+ <circle cx="1120" cy="160" r="102" fill="none" stroke="#C5A66C" stroke-width="2"/>
+ <circle cx="1120" cy="160" r="64" fill="none" stroke="#526B70" stroke-width="1"/>
+ <path d="M1064 186L1100 122L1135 186L1176 114" fill="none" stroke="#C5A66C" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+ <rect x="56" y="54" width="32" height="4" fill="#C5A66C"/>
+ <text x="105" y="65" font-family="Arial,sans-serif" font-size="17" letter-spacing="5" fill="#C5A66C">BIZNOMAD</text>
+ <text x="56" y="157" font-family="Arial,sans-serif" font-size="66" font-weight="700" letter-spacing="-2" fill="#F4F1E9">Claude Skills</text>
+ <text x="58" y="205" font-family="Arial,sans-serif" font-size="21" fill="#AEBBBE">The personal toolkit behind repeatable, agent-assisted work.</text>
+ <text x="58" y="271" font-family="Arial,sans-serif" font-size="13" letter-spacing="3" fill="#C5A66C">GROWTH / COMMERCE / CREATIVE / ENGINEERING</text>
+</svg>
